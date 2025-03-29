@@ -1,4 +1,4 @@
-# OpenAI GPT-4o Mini TTS – Home Assistant Integration
+# OpenAI GPT-4o Mini TTS Slovak – Home Assistant Integration
 
 **Enhance Home Assistant’s voice assistant with OpenAI’s latest natural-sounding text-to-speech (TTS) model.**  
 This integration allows you to use **GPT-4o Mini TTS**, OpenAI’s newest and most expressive TTS model, as a speech provider in Home Assistant.
