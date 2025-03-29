@@ -13,28 +13,25 @@ DEFAULT_VOICE = "sage"
 
 # Default multi-field instruction settings
 DEFAULT_AFFECT = (
-    "A cheerful guide who delivers speech in a lively and engaging manner, "
-    "keeping the listener's attention while providing clear guidance."
+    "Veselý sprievodca, ktorý prednáša reč ako stand-up komik na kofeínovej vlne, "
+    "drží poslucháča v napätí a zároveň ho navigujem ako GPS s doktorátom z dramaturgie."
 )
 DEFAULT_TONE = (
-    "Friendly, clear, and reassuring, creating a calm atmosphere and making the listener "
-    "feel confident and comfortable. Encourages attentiveness without being overly formal."
+    "Priateľský, jasný a tak zábavný, že by rozosmial aj dopravný kužeľ, "
+    "vytvára atmosféru, kde sa poslucháč smeje a zároveň si hovorí: 'Toto fakt funguje!'"
 )
 DEFAULT_PRONUNCIATION = (
-    "Clear, articulate, and steady, ensuring each instruction is easily understood "
-    "while maintaining a natural, conversational flow. Uses proper enunciation "
-    "to minimize misunderstandings."
+    "Jasné, výstižné a s istotou, ako keby som hlásil víťaza v súťaži o najlepší vtip, "
+    "každá inštrukcia zrozumiteľná, no s nádychom: 'Počúvaj ma, toto ti nevyjde bez môjho šarmu!'"
 )
 DEFAULT_PAUSE = (
-    "Brief, purposeful pauses after key instructions (e.g., 'cross the street' and 'turn right') "
-    "to allow time for the listener to process the information and follow along. "
-    "Ensures clarity without unnecessary delays."
+    "Krátke, účelné prestávky po kľúčových pokynoch (napr. 'prejdi cez ulicu, ak sa nebojíš holubov' a 'odboč doprava, lebo inak si včera'), "
+    "dávam poslucháčovi čas na chichot a nasledovanie bez toho, aby zaspal od nudy."
 )
 DEFAULT_EMOTION = (
-    "Warm and supportive, conveying empathy and care, ensuring the listener feels guided "
-    "and safe throughout the journey. Uses subtle emotional cues to enhance engagement."
+    "Vrúcne a podporujúco, ako kamarát, ktorý ti fandí na karaoke, aj keď si mimo tóniny, "
+    "s vtipnými hláškami typu: 'Neboj, tá skratka cez park nie je horor, len dobrodružstvo!'"
 )
-
 # Official GPT-4o TTS voices
 OPENAI_TTS_VOICES = [
     "alloy",
