@@ -1,5 +1,5 @@
 {
-    "name": "OpenAI GPT-4o Mini TTS",
+    "name": "OpenAI GPT-4o Mini TTS Slovak",
     "domain": "openai_gpt4o_tts",
     "homeassistant": "2025.3.3",
     "render_readme": true,
