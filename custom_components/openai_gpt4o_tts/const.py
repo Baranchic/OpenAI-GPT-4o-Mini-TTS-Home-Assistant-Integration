@@ -1,12 +1,16 @@
-"""Constants for OpenAI GPT-4o Mini TTS integration."""
+"""Constants for OpenAI TTS integration."""
 
-DOMAIN = "openai_gpt4o_tts"
+DOMAIN = "openai_tts"
 PLATFORMS = ["tts"]
 
 # Configuration keys
 CONF_API_KEY = "api_key"
 CONF_VOICE = "voice"
-CONF_INSTRUCTIONS = "instructions"
+CONF_AFFECT = "affect_personality"
+CONF_TONE = "tone"
+CONF_PRONUNCIATION = "pronunciation"
+CONF_PAUSE = "pause"
+CONF_EMOTION = "emotion"
 
 # Default voice setting
 DEFAULT_VOICE = "sage"
@@ -32,16 +36,14 @@ DEFAULT_EMOTION = (
     "Vrúcne a podporujúco, ako kamarát, ktorý ti fandí na karaoke, aj keď si mimo tóniny, "
     "s vtipnými hláškami typu: 'Neboj, tá skratka cez park nie je horor, len dobrodružstvo!'"
 )
-# Official GPT-4o TTS voices
+
+# Official OpenAI TTS voices (plus your choice)
 OPENAI_TTS_VOICES = [
     "alloy",
-    "ash",
-    "ballad",
-    "coral",
     "echo",
     "fable",
-    "onyx",
     "nova",
-    "sage",
-    "shimmer"
+    "onyx",
+    "shimmer",
+    "sage"  # Kept as per your request
 ]
