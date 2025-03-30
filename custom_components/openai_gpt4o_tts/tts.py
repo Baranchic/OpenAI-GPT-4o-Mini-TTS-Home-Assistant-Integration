@@ -12,7 +12,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN, OPENAI_TTS_VOICES
-from .gpt4o import GPT4oClient
+from .tts_client import OpenAITTSClient  # Updated import
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -21,17 +21,17 @@ async def async_setup_entry(
     config_entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback
 ) -> None:
-    """Set up GPT-4o TTS from a config entry."""
+    """Set up OpenAI TTS from a config entry."""
     client = hass.data[DOMAIN][config_entry.entry_id]
-    async_add_entities([OpenAIGPT4oTTSProvider(config_entry, client)])
+    async_add_entities([OpenAITTSProvider(config_entry, client)])
 
-class OpenAIGPT4oTTSProvider(TextToSpeechEntity):
-    """GPT-4o TTS => 'tts.openai_gpt4o_tts_say' in Developer Tools."""
+class OpenAITTSProvider(TextToSpeechEntity):
+    """OpenAI TTS => 'tts.openai_tts_say' in Developer Tools."""
 
-    def __init__(self, config_entry: ConfigEntry, client: GPT4oClient) -> None:
+    def __init__(self, config_entry: ConfigEntry, client: OpenAITTSClient) -> None:
         self._config_entry = config_entry
         self._client = client
-        self._name = "OpenAI GPT-4o Mini TTS"
+        self._name = "OpenAI TTS"
         self._attr_unique_id = f"{config_entry.entry_id}-tts"
 
     @property
@@ -46,7 +46,7 @@ class OpenAIGPT4oTTSProvider(TextToSpeechEntity):
 
     @property
     def supported_languages(self) -> list[str]:
-        """Return a list of supported languages (mainly English)."""
+        """Return a list of supported languages."""
         return ["sk"]
 
     @property
@@ -57,7 +57,7 @@ class OpenAIGPT4oTTSProvider(TextToSpeechEntity):
     @property
     def supported_options(self) -> list[str]:
         """Which TTS options can be overridden in the UI or service call."""
-        return [ATTR_VOICE, "instructions", ATTR_AUDIO_OUTPUT]
+        return [ATTR_VOICE, ATTR_AUDIO_OUTPUT]
 
     async def async_get_tts_audio(
         self, message: str, language: str, options: dict | None = None
@@ -69,7 +69,7 @@ class OpenAIGPT4oTTSProvider(TextToSpeechEntity):
         return audio_format, audio_data
 
     def async_get_supported_voices(self, language: str) -> list[Voice] | None:
-        """Return known GPT-4o voices for the voice dropdown (if HA version supports it)."""
+        """Return known OpenAI TTS voices for the voice dropdown."""
         return [Voice(vid, vid.capitalize()) for vid in OPENAI_TTS_VOICES]
 
     @property
