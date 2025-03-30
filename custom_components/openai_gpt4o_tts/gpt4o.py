@@ -3,8 +3,8 @@ import requests
 
 _LOGGER = logging.getLogger(__name__)
 
-class GPT4oClient:
-    """Handles direct calls to OpenAI's /v1/audio/speech for GPT-4o TTS."""
+class OpenAITTSClient:
+    """Handles direct calls to OpenAI's /v1/audio/speech for TTS."""
 
     def __init__(self, hass, entry):
         self.hass = hass
@@ -12,18 +12,36 @@ class GPT4oClient:
 
         self._api_key = entry.data["api_key"]
         self._voice = entry.data.get("voice")
-        # This single field now contains the combined instructions
-        self._instructions = entry.data.get("instructions")
-        self._model = "gpt-4o-mini-tts"
+        # Use instruction fields to flavor the TTS output
+        self._affect = entry.data.get("affect_personality", "")
+        self._tone = entry.data.get("tone", "")
+        self._pronunciation = entry.data.get("pronunciation", "")
+        self._pause = entry.data.get("pause", "")
+        self._emotion = entry.data.get("emotion", "")
+        self._model = "tts-1"  # Standard OpenAI TTS model
 
     async def get_tts_audio(self, text: str, options: dict | None = None):
-        """Generate TTS audio from GPT-4o using direct HTTP calls."""
+        """Generate TTS audio from OpenAI using direct HTTP calls."""
         if options is None:
             options = {}
 
         voice = options.get("voice", self._voice)
-        instructions = options.get("instructions", self._instructions)
         audio_format = options.get("audio_output", "mp3")
+
+        # Combine instruction fields into a fun/happy prefix
+        instructions_parts = []
+        if self._affect:
+            instructions_parts.append(self._affect)
+        if self._tone:
+            instructions_parts.append(self._tone)
+        if self._pronunciation:
+            instructions_parts.append(self._pronunciation)
+        if self._pause:
+            instructions_parts.append(self._pause)
+        if self._emotion:
+            instructions_parts.append(self._emotion)
+        prefix = " ".join(instructions_parts) + " " if instructions_parts else ""
+        full_text = f"{prefix}{text}"  # Prepend instructions to make it funny/happy
 
         headers = {
             "Authorization": f"Bearer {self._api_key}",
@@ -32,8 +50,7 @@ class GPT4oClient:
         payload = {
             "model": self._model,
             "voice": voice,
-            "input": text,
-            "instructions": instructions,
+            "input": full_text,
             "response_format": audio_format
         }
 
@@ -55,5 +72,5 @@ class GPT4oClient:
         try:
             return await self.hass.async_add_executor_job(do_request)
         except Exception as e:
-            _LOGGER.error("Error generating GPT-4o TTS audio: %s", e)
+            _LOGGER.error("Error generating OpenAI TTS audio: %s", e)
             return None, None
